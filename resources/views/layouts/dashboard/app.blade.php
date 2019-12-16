@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/bootstrap3.min.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/font-awesome/css/font-awesome.min.css') }}">
   <!-- Ionicons -->
@@ -28,7 +28,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/bootstrap3-wysihtml5.min.css') }}">
 
 
-  @if (config('app.locale') == 'ar')
+  @if (app()->getLocale() == 'ar')
     <link rel="stylesheet" href="{{ asset('dashboard/css/Adminlte_rtl.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dashboard/css/bootstrap-rtl.min.css') }}">
     <!-- Google Font -->
@@ -45,6 +45,44 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   @endif
 
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
+
+  <!-- jQuery 3 -->
+  <script type="text/javascript" src="{{ asset('dashboard/js/jquery.min.js') }}"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script type="text/javascript" src="{{ asset('dashboard/js/jquery-ui.min.js') }}"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script type="text/javascript">
+    $.widget.bridge('uibutton', $.ui.button);
+  </script>
+  <!-- Bootstrap 3.3.7 -->
+  <script type="text/javascript" src="{{ asset('dashboard/js/bootstrap3.min.js') }}"></script>
+  <!-- Morris.js charts -->
+  <script type="text/javascript" src="{{ asset('dashboard/js/raphael.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('dashboard/js/morris.min.js') }}"></script>
+  <!-- Sparkline -->
+  <script type="text/javascript" src="{{ asset('dashboard/js/jquery.sparkline.min.js') }}"></script>
+  <!-- jvectormap -->
+  <script type="text/javascript" src="{{ asset('dashboard/js/jquery-jvectormap-1.2.2.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('dashboard/js/jquery-jvectormap-world-mill-en.js') }}"></script>
+  <!-- jQuery Knob Chart -->
+  <script type="text/javascript" src="{{ asset('dashboard/js/jquery.knob.min.js') }}"></script>
+  <!-- daterangepicker -->
+  <script type="text/javascript" src="{{ asset('dashboard/js/moment.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('dashboard/js/daterangepicker.js') }}"></script>
+  <!-- datepicker -->
+  <script type="text/javascript" src="{{ asset('dashboard/js/bootstrap-datepicker.min.js') }}"></script>
+  <!-- Bootstrap WYSIHTML5 -->
+  <script type="text/javascript" src="{{ asset('dashboard/js/bootstrap3-wysihtml5.all.min.js') }}"></script>
+  <!-- Slimscroll -->
+  <script type="text/javascript" src="{{ asset('dashboard/js/jquery.slimscroll.min.js') }}"></script>
+  <!-- FastClick -->
+  <script type="text/javascript" src="{{ asset('dashboard/js/fastclick.js') }}"></script>
+  <!-- AdminLTE App -->
+  <script type="text/javascript" src="{{ asset('dashboard/js/adminlte.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -52,6 +90,17 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+
+  <style type="text/css">
+    h1, h2, h3, h4, h5, h6 {
+       font-weight: normal;
+    }
+
+    .mr-2 {
+      margin-right: 5px;
+    }
+  </style>
+
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -278,42 +327,29 @@
 
 
 
-<!-- jQuery 3 -->
-<script type="text/script" src="{{ asset('dashboard/js/jquery.min.js') }}"></script>
-<!-- jQuery UI 1.11.4 -->
-<script type="text/script" src="{{ asset('dashboard/js/jquery-ui.min.js') }}"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script type="text/script">
-  $.widget.bridge('uibutton', $.ui.button);
+<script type="text/javascript">
+
+  $('.delete').click(function(e) {
+    var that = $(this);
+    e.preventDefault();
+
+    var n = new Noty({
+      text: "@lang('site.confirm_delete')",
+      type: "warning",
+      killer: true,
+      buttons: [
+        Noty.button("@lang('site.yes')", 'btn btn-success mr-2', function() {
+          that.closest('form').submit();
+        }),
+
+        Noty.button("@lang('site.no')", 'btn btn-danger mr-2', function() {
+          n.close();
+        })
+      ]
+    }).show();
+  });
+
 </script>
-<!-- Bootstrap 3.3.7 -->
-<script type="text/script" src="{{ asset('dashboard/js/bootstrap.min.js') }}"></script>
-<!-- Morris.js charts -->
-<script type="text/script" src="{{ asset('dashboard/js/raphael.min.js') }}"></script>
-<script type="text/script" src="{{ asset('dashboard/js/morris.min.js') }}"></script>
-<!-- Sparkline -->
-<script type="text/script" src="{{ asset('dashboard/js/jquery.sparkline.min.js') }}"></script>
-<!-- jvectormap -->
-<script type="text/script" src="{{ asset('dashboard/js/jquery-jvectormap-1.2.2.min.js') }}"></script>
-<script type="text/script" src="{{ asset('dashboard/js/jquery-jvectormap-world-mill-en.js') }}"></script>
-<!-- jQuery Knob Chart -->
-<script type="text/script" src="{{ asset('dashboard/js/jquery.knob.min.js') }}"></script>
-<!-- daterangepicker -->
-<script type="text/script" src="{{ asset('dashboard/js/moment.min.js') }}"></script>
-<script type="text/script" src="{{ asset('dashboard/js/daterangepicker.js') }}"></script>
-<!-- datepicker -->
-<script type="text/script" src="{{ asset('dashboard/js/bootstrap-datepicker.min.js') }}"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script type="text/script" src="{{ asset('dashboard/js/bootstrap3-wysihtml5.all.min.js') }}"></script>
-<!-- Slimscroll -->
-<script type="text/script" src="{{ asset('dashboard/js/jquery.slimscroll.min.js') }}"></script>
-<!-- FastClick -->
-<script type="text/script" src="{{ asset('dashboard/js/fastclick.js') }}"></script>
-<!-- AdminLTE App -->
-<script type="text/script" src="{{ asset('dashboard/js/adminlte.min.js') }}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script type="text/script" src="{{ asset('dashboard/js/dashboard.js') }}"></script>
-<!-- AdminLTE for demo purposes -->
-<script type="text/script" src="{{ asset('dashboard/js/demo.js') }}"></script>
+
 </body>
 </html>

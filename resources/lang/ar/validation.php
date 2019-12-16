@@ -150,7 +150,7 @@ return [
         'username'              => 'اﺳﻢ اﻟﻤُﺴﺘﺨﺪﻡ',
         'email'                 => 'اﻟﺒﺮﻳﺪ اﻻﻟﻜﺘﺮﻭﻧﻲ',
         'first_name'            => 'اﻻﺳﻢ اﻷﻭﻝ',
-        'last_name'             => 'اﺳﻢ اﻟﻌﺎﺋﻠﺔ',
+        'last_name'             => 'الاسم الاخير',
         'password'              => 'ﻛﻠﻤﺔ اﻟﻤﺮﻭﺭ',
         'password_confirmation' => 'ﺗﺄﻛﻴﺪ ﻛﻠﻤﺔ اﻟﻤﺮﻭﺭ',
         'city'                  => 'اﻟﻤﺪﻳﻨﺔ',
