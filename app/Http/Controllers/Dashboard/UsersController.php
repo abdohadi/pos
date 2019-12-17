@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Image;
+use Storage;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -18,10 +21,10 @@ class UsersController extends Controller
 
     public function index(Request $request)
     {
-        $users = User::whereRoleIs('admin')->when($request->search, function($q) use ($request) {
+        $users = User::when($request->search, function($q) use ($request) {
             return $q->where('first_name', 'like', '%' .$request->search. '%')
                 ->orWhere('last_name', 'like', '%' .$request->search. '%');
-        })->latest()->paginate(5);
+        })->whereRoleIs('admin')->latest()->paginate(5);
 
         return view('dashboard.users.index', compact('users'));
     }
@@ -38,23 +41,40 @@ class UsersController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'email|required|unique:users',
-            'password' => 'required|confirmed|min:8'
+            'password' => 'required|confirmed|min:8',
+            'image' => 'image|mimes:png,jpg,jpeg,gif|max:2048',
+            'permissions' => 'required|min:1',
         ]);
 
-        // creating the user
-        $attributes = $request->except(['password', 'password_confirmation', 'permissions']);
-        $attributes['password'] = bcrypt($request->password);
-        if ($validated_data) $user = User::create($attributes);
+        if ($validated_data) {
+            $attributes = $request->except(['password', 'password_confirmation', 'permissions', 'image']);
+            $attributes['password'] = bcrypt($request->password);
 
-        // attaching a role and permissions
-        $user->attachRole('admin');
-        $user->syncPermissions($request->permissions);
+            // prepare the img
+            if ($request->image) {
+                // handel(compress and save) the image
+                Image::make($request->image)
+                    ->resize(300, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })
+                    ->save(public_path('uploads/user_images/' .$request->image->hashName()));
 
-        // setting a flash msg
-        session()->flash('success', __('site.added_successfully'));
+                $attributes['image'] = $request->image->hashName();
+            }
 
-        // redirection
-        return redirect(route('dashboard.users.index')); 
+            // creating the user
+            if ($validated_data) $user = User::create($attributes);
+
+            // attaching a role and permissions
+            $user->attachRole('admin');
+            if ($request->permissions) $user->syncPermissions($request->permissions);
+
+            // setting a flash msg
+            session()->flash('success', __('site.added_successfully'));
+
+            // redirection
+            return redirect(route('dashboard.users.index')); 
+        }
     }
 
     public function edit(User $user)
@@ -68,25 +88,49 @@ class UsersController extends Controller
         $validated_data = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'email|required|unique:users'    //%%%%% how can we leave the email without updating?
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+            'permissions' => 'required|min:1',
         ]);
 
-        // creating the user
-        $attributes = $request->except(['permissions']);
-        if ($validated_data) $user->update($attributes);
+        if ($validated_data) {
+            $attributes = $request->except(['permissions', 'image']);
 
-        // attaching permissions
-        $user->syncPermissions($request->permissions);
+            if ($request->image) {
+                if ($user->image != 'default.png') {
+                    Storage::disk('public_uploads')->delete('/user_images/' .$user->image);
+                }
 
-        // setting a flash msg
-        session()->flash('success', __('site.updated_successfully'));
+                // handel(compress and save) the image
+                Image::make($request->image)
+                    ->resize(300, null, function($constraint) {
+                        $constraint->aspectRatio();
+                    })
+                    ->save(public_path('uploads/user_images/' .$request->image->hashName()));
 
-        // redirection
-        return redirect(route('dashboard.users.index'));
+                $attributes['image'] = $request->image->hashName();
+            }
+
+            // update the user
+            $user->update($attributes);
+
+            // attaching permissions
+            if ($request->permissions) $user->syncPermissions($request->permissions);
+    
+            // setting a flash msg
+            session()->flash('success', __('site.updated_successfully'));
+
+            // redirection
+            return redirect(route('dashboard.users.index'));
+        }
+
     }
 
     public function destroy(User $user)
     {
+        if ($user->image != 'default.png') {
+            Storage::disk('public_uploads')->delete('/user_images/' .$user->image);
+        }
+
         $user->delete();
 
         session()->flash('success', __('site.deleted_successfully'));

@@ -22,7 +22,7 @@
 				@include('partials._errors')
 
 				<div class="box-body">
-					<form action="{{ route('dashboard.users.store') }}" method="post">
+					<form action="{{ route('dashboard.users.store') }}" method="post" enctype="multipart/form-data">
 						@csrf
 
 						<div class="form-group">
@@ -38,6 +38,15 @@
 						<div class="form-group">
 							<label for="email">@lang('site.email')</label>
 							<input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}">
+						</div>
+
+						<div class="form-group">
+							<label for="image">@lang('site.image')</label>
+							<input type="file" name="image" id="image" class="form-control image-input">
+						</div>
+
+						<div class="form-group">
+							<img src="{{ asset('uploads/user_images/default.png') }}" class="img-thumbnail image-preview" style="width: 100px">
 						</div>
 
 						<div class="form-group">
@@ -70,7 +79,7 @@
 					            	@foreach ($models as $index => $model)
 						              	<div class="tab-pane {{ $index == 0 ? 'active' : '' }}" id="{{$model}}">
 						              		@foreach ($perms as $key => $perm)
-												<label><input type="checkbox" name="permissions[]" value="{{ "{$perm}_{$model}" }}"> @lang("site.{$perm}")</label>
+												<label><input type="checkbox" name="permissions[]" {{ old('permissions') && in_array("{$perm}_{$model}", old('permissions')) ? 'checked' : '' }} value="{{ "{$perm}_{$model}" }}"> @lang("site.{$perm}")</label>
 						              		@endforeach
 						              	</div>
 						            @endforeach

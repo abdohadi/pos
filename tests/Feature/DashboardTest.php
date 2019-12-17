@@ -90,6 +90,16 @@ class DashboardTest extends TestCase
         $this->actingAs($user)->post('dashboard/users', $newUser)->assertSessionHasErrors('password');
     }
 
+    ///////// i don't know how to test for images ///////////
+    /** @test */
+    // public function creating_a_user_image_validation()
+    // {
+    //     $user = $this->createUser('admin', ['create_users']);
+
+    //     $newUser = factory('App\User')->raw(['image'=>'default.png']);
+    //     $this->actingAs($user)->post('dashboard/users', $newUser)->assertSessionHasErrors('image');
+    // }
+
     /** @test */
     public function a_user_without_create_permission_cannot_create_users()
     {
@@ -139,12 +149,12 @@ class DashboardTest extends TestCase
         $attributes = [
             'first_name' => 'name',
             'last_name' => 'name',
-            'email' => 'name@name.com',
+            'email' => 'example@example.com',
             'permissions' => ['read_users', 'update_users']
         ];
 
         $this->put("dashboard/users/{$newUser->id}", $attributes);
-        $this->assertDatabaseHas('users', ['first_name' => $attributes['first_name']]);
+        $this->assertDatabaseHas('users', ['email' => $attributes['email']]);
 
         $this->assertTrue($newUser->can('update_users'));
     }
@@ -164,8 +174,10 @@ class DashboardTest extends TestCase
     {
         $user = $this->createUser('admin', ['delete_users']);
 
-        $newUser = $this->createUser('admin', ['read_users', 'create_users']);
+        $newUser = $this->createUser('admin');
 
-        $this->actingAs($user)->delete("dashboard/users/{$newUser->id}")->assertStatus(200);
+        $this->actingAs($user)->delete("dashboard/users/{$newUser->id}");
+
+        $this->assertDatabaseMissing('users', ['email' => $newUser->email]);
     }
 }

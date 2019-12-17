@@ -35,7 +35,7 @@
 				</div>
 
 				<div class="box-body">
-					@if ($users->count())
+					@if (count($users))
 						<table class="table table-bordered table-hover table-striped">
 							<thead>
 								<tr>
@@ -43,6 +43,7 @@
 									<th>@lang('site.first_name')</th>
 									<th>@lang('site.last_name')</th>
 									<th>@lang('site.email')</th>
+									<th>@lang('site.image')</th>
 									<th>@lang('site.action')</th>
 								</tr>
 							</thead>
@@ -50,10 +51,11 @@
 							<tbody>
 								@foreach ($users as $index => $user)
 									<tr>
-										<td>{{ $index }}</td>
+										<td>{{ $index + 1 }}</td>
 										<td>{{ $user->first_name }}</td>
 										<td>{{ $user->last_name }}</td>
 										<td>{{ $user->email }}</td>
+										<td><img src="{{ $user->image_path }}" style="width: 100px" class="img-thumbnail"></td>
 										<td>
 											@if (auth()->user()->hasPermission('update_users'))
 												<a href="{{ route('dashboard.users.edit', $user->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
