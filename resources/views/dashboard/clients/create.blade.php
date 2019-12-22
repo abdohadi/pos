@@ -4,11 +4,11 @@
 
 	<div class="content-wrapper">
 		<section class="content-header">
-			<h1>@lang('site.categories')</h1>
+			<h1>@lang('site.clients')</h1>
 			
 			<ol class="breadcrumb">
 				<li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
-				<li><a href="{{ route('dashboard.categories.index') }}"> @lang('site.categories')</a></li>
+				<li><a href="{{ route('dashboard.clients.index') }}"> @lang('site.clients')</a></li>
 				<li class="active">@lang('site.add')</li>
 			</ol>
 		</section>
@@ -22,17 +22,25 @@
 				@include('partials._errors')
 
 				<div class="box-body">
-					<form action="{{ route('dashboard.categories.store') }}" method="post">
+					<form action="{{ route('dashboard.clients.store') }}" method="post">
 						@csrf
 
-						@foreach (config('translatable.locales') as $locale)
+						<div class="form-group">
+							<label for="name">@lang('site.name')</label>
+							<input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
+						</div>
+
+						@for ($i = 1; $i <= 2; $i++)
 							<div class="form-group">
-								<label for="name">@lang('site.' .$locale. '.name')</label>
-								{{-- ar => ['name' => 'ar name'] --}}
-								{{-- en => ['name' => 'en name'] --}}
-								<input type="text" name="{{ $locale }}[name]" id="name" class="form-control" value="{{ old($locale. '.name') }}" required>
+								<label for="phone{$i}">@lang("site.phone{$i}")</label>
+								<input type="text" name="phone[]" id="phone{$i}" class="form-control" value="{{ old('phone')[$i-1] }}">
 							</div>
-						@endforeach
+						@endfor
+
+						<div class="form-group">
+							<label for="address">@lang('site.address')</label>
+							<textarea name="address" id="address" class="form-control">{{ old('address') }}</textarea>
+						</div>
 
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</button>

@@ -22,15 +22,6 @@ return [
  'no' => 'ﻻ',
  'confirm_delete' => 'ﺗﺎﻛﻴﺪ اﻟﺤﺬﻑ',
 
- 'users' => 'اﻟﻤﺸﺮﻓﻴﻦ',
- 'first_name' => 'اﻻﺳﻢ اﻻﻭﻝ',
- 'last_name' => 'اﻻﺳﻢ اﻻﺧﻴﺮ',
- 'email' => 'اﻟﺒﺮﻳﺪ اﻻﻟﻜﺘﺮﻭﻧﻲ',
- 'image' => 'ﺻﻮﺭﻩ',
- 'password' => 'ﻛﻠﻤﺔ اﻟﻤﺮﻭﺭ',
- 'password_confirmation' => 'ﺗﺎﻛﻴﺪ ﻛﻠﻤﺔ اﻟﻤﺮﻭﺭ',
- 'action' => 'اﻛﺸﻦ',
-
  'categories' => 'اﻻﻗﺴﺎﻡ',
  'all_categories' => 'ﻛﻞ اﻻﻗﺴﺎﻡ',
  'products_count' => 'ﻋﺪﺩ اﻟﻤﻨﺘﺠﺎﺕ',
@@ -39,13 +30,29 @@ return [
 
 
  'products' => 'اﻟﻤﻨﺘﺠﺎﺕ',
- 'category' => 'القسم',
+ 'category' => 'اﻟﻘﺴﻢ',
  'description' => 'اﻟﻮﺻﻒ',
  'purchase_price' => 'ﺳﻌﺮ اﻟﺸﺮاء',
  'sale_price' => 'ﺳﻌﺮ اﻟﺒﻴﻊ',
  'profit_percent' => 'ﻧﺴﺒﺔ اﻟﻤﻜﺴﺐ',
  'stock' => 'اﻟﻤﺨﺰﻥ',
 
+
+ 'clients' => 'اﻟﻌﻤﻼء',
+ 'phone' => 'اﻟﺘﻠﻴﻔﻮﻥ',
+ 'phone1' => 'اﻟﺘﻠﻴﻔﻮﻥ 1',
+ 'phone2' => 'اﻟﺘﻠﻴﻔﻮﻥ 2',
+ 'address' => 'اﻟﻌﻨﻮاﻥ',
+
+
+ 'users' => 'اﻟﻤﺸﺮﻓﻴﻦ',
+ 'first_name' => 'اﻻﺳﻢ اﻻﻭﻝ',
+ 'last_name' => 'اﻻﺳﻢ اﻻﺧﻴﺮ',
+ 'email' => 'اﻟﺒﺮﻳﺪ اﻻﻟﻜﺘﺮﻭﻧﻲ',
+ 'image' => 'ﺻﻮﺭﻩ',
+ 'password' => 'ﻛﻠﻤﺔ اﻟﻤﺮﻭﺭ',
+ 'password_confirmation' => 'ﺗﺎﻛﻴﺪ ﻛﻠﻤﺔ اﻟﻤﺮﻭﺭ',
+ 'action' => 'اﻛﺸﻦ',
 
  'permissions' => 'اﻟﺼﻼﺣﻴﺎﺕ',
 
@@ -62,4 +69,5 @@ return [
   'name' => 'اﻻﺳﻢ ﺑﺎﻟﻠﻐﺔ اﻻﻧﺠﻠﻴﺰﻳﻪ',
   'description' => 'اﻟﻮﺻﻒ ﺑﺎﻟﻠﻐﺔ اﻻﻧﺠﻠﻴﺰﻳﻪ',
  ],
+
 ];

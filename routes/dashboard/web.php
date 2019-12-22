@@ -18,6 +18,9 @@ Route::group([
 		// product routes
 		Route::resource('products', 'ProductsController');
 
+		// client routes
+		Route::resource('clients', 'ClientsController');
+
 		// user routes
 		Route::resource('users', 'UsersController');
 	});
