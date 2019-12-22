@@ -18,24 +18,48 @@ return [
  'delete' => 'ﺣﺬﻑ',
  'search' => 'ﺑﺤﺚ',
 
- 'yes' => 'نعم',
- 'no' => 'لا',
- 'confirm_delete' => 'تاكيد الحذف',
-
- 'categories' => 'اﻻﻗﺴﺎﻡ',
- 'products' => 'اﻟﻤﻨﺘﺠﺎﺕ',
+ 'yes' => 'ﻧﻌﻢ',
+ 'no' => 'ﻻ',
+ 'confirm_delete' => 'ﺗﺎﻛﻴﺪ اﻟﺤﺬﻑ',
 
  'users' => 'اﻟﻤﺸﺮﻓﻴﻦ',
  'first_name' => 'اﻻﺳﻢ اﻻﻭﻝ',
  'last_name' => 'اﻻﺳﻢ اﻻﺧﻴﺮ',
  'email' => 'اﻟﺒﺮﻳﺪ اﻻﻟﻜﺘﺮﻭﻧﻲ',
- 'image' => 'صوره',
+ 'image' => 'ﺻﻮﺭﻩ',
  'password' => 'ﻛﻠﻤﺔ اﻟﻤﺮﻭﺭ',
  'password_confirmation' => 'ﺗﺎﻛﻴﺪ ﻛﻠﻤﺔ اﻟﻤﺮﻭﺭ',
  'action' => 'اﻛﺸﻦ',
+
+ 'categories' => 'اﻻﻗﺴﺎﻡ',
+ 'all_categories' => 'ﻛﻞ اﻻﻗﺴﺎﻡ',
+ 'products_count' => 'ﻋﺪﺩ اﻟﻤﻨﺘﺠﺎﺕ',
+ 'related_products' => 'اﻟﻤﻨﺘﺠﺎﺕ اﻟﻤﺮﺗﺒﻄﻪ',
+ 'name' => 'اﻻﺳﻢ',
+
+
+ 'products' => 'اﻟﻤﻨﺘﺠﺎﺕ',
+ 'category' => 'القسم',
+ 'description' => 'اﻟﻮﺻﻒ',
+ 'purchase_price' => 'ﺳﻌﺮ اﻟﺸﺮاء',
+ 'sale_price' => 'ﺳﻌﺮ اﻟﺒﻴﻊ',
+ 'profit_percent' => 'ﻧﺴﺒﺔ اﻟﻤﻜﺴﺐ',
+ 'stock' => 'اﻟﻤﺨﺰﻥ',
+
 
  'permissions' => 'اﻟﺼﻼﺣﻴﺎﺕ',
 
  'login' => 'ﺗﺴﺠﻴﻞ اﻟﺪﺧﻮﻝ',
  'logout' => 'ﺗﺴﺠﻴﻞ اﻟﺨﺮﻭﺝ',
+
+
+ 'ar' => [
+  'name' => 'اﻻﺳﻢ ﺑﺎﻟﻠﻐﺔ اﻟﻌﺮﺑﻴﺔ',
+  'description' => 'اﻟﻮﺻﻒ ﺑﺎﻟﻠﻐﺔ اﻟﻌﺮﺑﻴﺔ',
+ ],
+
+ 'en' => [
+  'name' => 'اﻻﺳﻢ ﺑﺎﻟﻠﻐﺔ اﻻﻧﺠﻠﻴﺰﻳﻪ',
+  'description' => 'اﻟﻮﺻﻒ ﺑﺎﻟﻠﻐﺔ اﻻﻧﺠﻠﻴﺰﻳﻪ',
+ ],
 ];

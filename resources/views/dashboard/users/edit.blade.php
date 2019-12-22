@@ -24,21 +24,21 @@
 				<div class="box-body">
 					<form action="{{ route('dashboard.users.update', $user->id) }}" method="post" enctype="multipart/form-data">
 						@csrf
-						@method('put')
+						@method('PUT')
 
 						<div class="form-group">
 							<label for="first_name">@lang('site.first_name')</label>
-							<input type="text" name="first_name" id="first_name" class="form-control" value="{{ $user->first_name }}">
+							<input type="text" name="first_name" id="first_name" class="form-control" value="{{ $user->first_name }}" required>
 						</div>
 
 						<div class="form-group">
 							<label for="last_name">@lang('site.last_name')</label>
-							<input type="text" name="last_name" id="last_name" class="form-control" value="{{ $user->last_name }}">
+							<input type="text" name="last_name" id="last_name" class="form-control" value="{{ $user->last_name }}" required>
 						</div>
 
 						<div class="form-group">
 							<label for="email">@lang('site.email')</label>
-							<input type="email" name="email" id="email" class="form-control" value="{{ $user->email }}">
+							<input type="email" name="email" id="email" class="form-control" value="{{ $user->email }}" required>
 						</div>
 
 						<div class="form-group">

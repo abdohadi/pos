@@ -21,10 +21,12 @@ class UsersController extends Controller
 
     public function index(Request $request)
     {
-        $users = User::when($request->search, function($q) use ($request) {
-            return $q->where('first_name', 'like', '%' .$request->search. '%')
-                ->orWhere('last_name', 'like', '%' .$request->search. '%');
-        })->whereRoleIs('admin')->latest()->paginate(5);
+        $users = User::whereRoleIs('admin')->where(function($query) use ($request) {
+            return $query->when($request->search, function($q) use ($request) {
+                return $q->where('first_name', 'like', '%' .$request->search. '%')
+                    ->orWhere('last_name', 'like', '%' .$request->search. '%');
+            });
+        })->latest()->paginate(5);
 
         return view('dashboard.users.index', compact('users'));
     }
@@ -37,7 +39,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         // validation
-        $validated_data = $request->validate([
+        $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'email|required|unique:users',
@@ -46,35 +48,38 @@ class UsersController extends Controller
             'permissions' => 'required|min:1',
         ]);
 
-        if ($validated_data) {
-            $attributes = $request->except(['password', 'password_confirmation', 'permissions', 'image']);
-            $attributes['password'] = bcrypt($request->password);
+        $attributes = $request->except(['password', 'password_confirmation', 'permissions', 'image']);
+        $attributes['password'] = bcrypt($request->password);
 
-            // prepare the img
-            if ($request->image) {
-                // handel(compress and save) the image
-                Image::make($request->image)
-                    ->resize(300, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })
-                    ->save(public_path('uploads/user_images/' .$request->image->hashName()));
+        // prepare the img
+        if ($request->image) {
+            // handel(compress and save) the image
+            Image::make($request->image)
+                ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save(public_path('uploads/user_images/' .$request->image->hashName()));
 
-                $attributes['image'] = $request->image->hashName();
-            }
-
-            // creating the user
-            if ($validated_data) $user = User::create($attributes);
-
-            // attaching a role and permissions
-            $user->attachRole('admin');
-            if ($request->permissions) $user->syncPermissions($request->permissions);
-
-            // setting a flash msg
-            session()->flash('success', __('site.added_successfully'));
-
-            // redirection
-            return redirect(route('dashboard.users.index')); 
+            $attributes['image'] = $request->image->hashName();
         }
+
+        // creating the user
+        $user = User::create($attributes);
+
+        // attaching a role and permissions
+        $user->attachRole('admin');
+        if ($request->permissions) $user->syncPermissions($request->permissions);
+
+        // setting a flash msg
+        session()->flash('success', __('site.added_successfully'));
+
+        // redirection
+        return redirect(route('dashboard.users.index')); 
+    }
+
+    public function show(User $user)
+    {
+        return abort(404);
     }
 
     public function edit(User $user)
@@ -85,44 +90,41 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         // validation
-        $validated_data = $request->validate([
+        $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
             'permissions' => 'required|min:1',
         ]);
 
-        if ($validated_data) {
-            $attributes = $request->except(['permissions', 'image']);
+        $attributes = $request->except(['permissions', 'image']);
 
-            if ($request->image) {
-                if ($user->image != 'default.png') {
-                    Storage::disk('public_uploads')->delete('/user_images/' .$user->image);
-                }
-
-                // handel(compress and save) the image
-                Image::make($request->image)
-                    ->resize(300, null, function($constraint) {
-                        $constraint->aspectRatio();
-                    })
-                    ->save(public_path('uploads/user_images/' .$request->image->hashName()));
-
-                $attributes['image'] = $request->image->hashName();
+        if ($request->image) {
+            if ($user->image != 'default.png') {
+                Storage::disk('public_uploads')->delete('/user_images/' .$user->image);
             }
 
-            // update the user
-            $user->update($attributes);
+            // handel(compress and save) the image
+            Image::make($request->image)
+                ->resize(300, null, function($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save(public_path('uploads/user_images/' .$request->image->hashName()));
 
-            // attaching permissions
-            if ($request->permissions) $user->syncPermissions($request->permissions);
-    
-            // setting a flash msg
-            session()->flash('success', __('site.updated_successfully'));
-
-            // redirection
-            return redirect(route('dashboard.users.index'));
+            $attributes['image'] = $request->image->hashName();
         }
 
+        // update the user
+        $user->update($attributes);
+
+        // attaching permissions
+        if ($request->permissions) $user->syncPermissions($request->permissions);
+
+        // setting a flash msg
+        session()->flash('success', __('site.updated_successfully'));
+
+        // redirection
+        return redirect(route('dashboard.users.index'));
     }
 
     public function destroy(User $user)

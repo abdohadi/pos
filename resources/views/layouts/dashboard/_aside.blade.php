@@ -4,7 +4,7 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-        <img src="{{ asset('user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+        <img src="{{ asset('uploads/user_images/' .auth()->user()->image) }}" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
         <p>{{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}</p>
@@ -27,6 +27,14 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
       <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i><span>@lang('site.dashboard')</span></a></li>
+
+      @if (auth()->user()->hasPermission('read_categories'))
+        <li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-th"></i><span>@lang('site.categories')</span></a></li>
+      @endif
+
+      @if (auth()->user()->hasPermission('read_products'))
+        <li><a href="{{ route('dashboard.products.index') }}"><i class="fa fa-th"></i><span>@lang('site.products')</span></a></li>
+      @endif
 
       @if (auth()->user()->hasPermission('read_users'))
         <li><a href="{{ route('dashboard.users.index') }}"><i class="fa fa-th"></i><span>@lang('site.users')</span></a></li>

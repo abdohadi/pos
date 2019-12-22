@@ -10,12 +10,13 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/bootstrap3.min.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/font-awesome/css/font-awesome.min.css') }}">
-  <!-- Ionicons -->
-  <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/ionicons/css/ionicons.min.css') }}">
   <!-- Theme style -->
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/skin-blue.min.css') }}">
+  {{-- 
+  <!-- Ionicons -->
+  <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/ionicons/css/ionicons.min.css') }}">
   <!-- Morris chart -->
   <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/morris.css') }}">
   <!-- jvectormap -->
@@ -26,7 +27,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/daterangepicker.css') }}">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/bootstrap3-wysihtml5.min.css') }}">
-
+ --}}
 
   @if (app()->getLocale() == 'ar')
     <link rel="stylesheet" href="{{ asset('dashboard/css/Adminlte_rtl.min.css') }}">
@@ -51,6 +52,7 @@
 
   <!-- jQuery 3 -->
   <script type="text/javascript" src="{{ asset('dashboard/js/jquery.min.js') }}"></script>
+  {{-- 
   <!-- jQuery UI 1.11.4 -->
   <script type="text/javascript" src="{{ asset('dashboard/js/jquery-ui.min.js') }}"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -80,6 +82,10 @@
   <script type="text/javascript" src="{{ asset('dashboard/js/jquery.slimscroll.min.js') }}"></script>
   <!-- FastClick -->
   <script type="text/javascript" src="{{ asset('dashboard/js/fastclick.js') }}"></script>
+   --}}
+  <!-- CKEDITOR -->
+  <script type="text/javascript" src="{{ asset('dashboard/plugins/ckeditor/ckeditor.js') }}"></script>
+  
   <!-- AdminLTE App -->
   <script type="text/javascript" src="{{ asset('dashboard/js/adminlte.min.js') }}"></script>
   <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
@@ -362,6 +368,10 @@
       reader.readAsDataURL(this.files[0]);
     }
   });
+
+
+  // ckeditor
+  CKEDITOR.config.language = "{{ app()->getLocale() }}";
 
 </script>
 

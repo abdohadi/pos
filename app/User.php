@@ -40,6 +40,7 @@ class User extends Authenticatable
     ];
 
     protected $appends = ['image_path'];
+    
 
     public function getFirstNameAttribute($value)
     {

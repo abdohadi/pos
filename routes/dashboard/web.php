@@ -1,7 +1,6 @@
 <?php
 
 
-
 Route::group([
 	'prefix' => LaravelLocalization::setLocale(),
 	// 'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewfPath' ]
@@ -13,8 +12,14 @@ Route::group([
 		// dashboard/index
 		Route::get('/index', 'DashboardController@index')->name('index');
 
-		// users routes
-		Route::resource('users', 'UsersController')->except(['show']);
+		// category routes
+		Route::resource('categories', 'CategoriesController');
+
+		// product routes
+		Route::resource('products', 'ProductsController');
+
+		// user routes
+		Route::resource('users', 'UsersController');
 	});
 
 	
