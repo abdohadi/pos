@@ -65,7 +65,7 @@
 							<div class="nav-tabs-custom">
 
 								@php
-									$models = ['users', 'categories', 'products'];
+									$models = ['users', 'categories', 'products', 'clients', 'orders'];
 									$perms = ['create', 'read', 'update', 'delete'];
 								@endphp
 

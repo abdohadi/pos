@@ -52,7 +52,7 @@
 
 						<div class="form-group">
 							<label for="image">@lang('site.image')</label>
-							<input type="file" name="image" id="image" class="form-control" value="{{ old('image') }}" required>
+							<input type="file" name="image" id="image" class="form-control" value="{{ old('image') }}">
 						</div>
 
 						<div class="form-group">
@@ -61,12 +61,12 @@
 
 						<div class="form-group">
 							<label for="purchase_price">@lang('site.purchase_price')</label>
-							<input type="number" min="1" name="purchase_price" id="purchase_price" class="form-control" value="{{ old('purchase_price') }}" required>
+							<input type="number" step="0.01" min="1" name="purchase_price" id="purchase_price" class="form-control" value="{{ old('purchase_price') }}" required>
 						</div>
 
 						<div class="form-group">
 							<label for="sale_price">@lang('site.sale_price')</label>
-							<input type="number" min="1" name="sale_price" id="sale_price" class="form-control" value="{{ old('sale_price') }}" required>
+							<input type="number" step="0.01" min="1" name="sale_price" id="sale_price" class="form-control" value="{{ old('sale_price') }}" required>
 						</div>
 
 						<div class="form-group">
@@ -75,7 +75,7 @@
 						</div>
 
 						<div class="form-group">
-							<button type="submit" min="1" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</button>
+							<button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</button>
 						</div>
 					</form>
 				</div>

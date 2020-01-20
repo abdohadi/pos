@@ -12,9 +12,9 @@
 */
 
 Route::get('/', function () {
-    return redirect()->route('dashboard.index');
+   return redirect()->route('dashboard.index');
 });
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');

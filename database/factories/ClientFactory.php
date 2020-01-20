@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Client::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'phone' => [rand(), rand()],
-        'address' => $faker->sentence,
+        'phone' => ['0111284182', '0111284182'],
+        'address' => 'Cairo',
     ];
 });

@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageClientsTest extends TestCase
 {
-    // use RefreshDatabase;
+    use RefreshDatabase;
 
     /** @test */
     public function a_user_without_read_permission_cannot_view_clients()

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Order;
 
 class Client extends Model
 {
@@ -11,4 +12,13 @@ class Client extends Model
    protected $casts = [
    	'phone' => 'array'
    ];
+
+   public function getNameAttribute($value)
+   {
+   	return ucfirst($value);
+   }//end of getNameAttribute
+
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
 }

@@ -5,6 +5,7 @@ return [
  'dashboard' => 'اﻟﺮﺋﻴﺴﻪ',
 
  'no_data_found' => 'ﻟﻻﺳﻒ ﻻ ﻳﻮﺟﺪ اﻱ ﺳﺠﻼﺕ',
+ 'no_records' => 'ﻟﻻﺳﻒ ﻻ ﻳﻮﺟﺪ اﻱ ﺳﺠﻼﺕ',
 
  'added_successfully' => 'ﺗﻢ اﺿﺎﻓﺔ اﻟﺒﻴﺎﻧﺎﺕ ﺑﻨﺠﺎﺡ',
  'updated_successfully' => 'ﺗﻢ ﺗﻌﺪﻳﻞ اﻟﺒﻴﺎﻧﺎﺕ ﺑﻨﺠﺎﺡ',
@@ -17,6 +18,9 @@ return [
  'update' => 'ﺗﻌﺪﻳﻞ',
  'delete' => 'ﺣﺬﻑ',
  'search' => 'ﺑﺤﺚ',
+ 'show' => 'ﻋﺮﺽ',
+ 'print' => 'ﻃﺒﻊ',
+ 'loading' => 'ﺟﺎﺭﻱ اﻟﺘﺤﻤﻴﻞ',
 
  'yes' => 'ﻧﻌﻢ',
  'no' => 'ﻻ',
@@ -30,19 +34,31 @@ return [
 
 
  'products' => 'اﻟﻤﻨﺘﺠﺎﺕ',
+ 'product' => 'اﻟﻤﻨﺘﺝ',
+ 'show_products' => 'ﻋﺮﺽ اﻟﻤﻨﺘﺠﺎﺕ',
  'category' => 'اﻟﻘﺴﻢ',
  'description' => 'اﻟﻮﺻﻒ',
  'purchase_price' => 'ﺳﻌﺮ اﻟﺸﺮاء',
  'sale_price' => 'ﺳﻌﺮ اﻟﺒﻴﻊ',
+ 'price' => 'اﻟﺴﻌﺮ',
+ 'quantity' => 'اﻟﻜﻤﻴﻪ',
  'profit_percent' => 'ﻧﺴﺒﺔ اﻟﻤﻜﺴﺐ',
  'stock' => 'اﻟﻤﺨﺰﻥ',
 
 
  'clients' => 'اﻟﻌﻤﻼء',
+ 'client_name' => 'اﺳﻢ اﻟﻌﻤﻴﻞ',
  'phone' => 'اﻟﺘﻠﻴﻔﻮﻥ',
- 'phone1' => 'اﻟﺘﻠﻴﻔﻮﻥ 1',
- 'phone2' => 'اﻟﺘﻠﻴﻔﻮﻥ 2',
+ 'phone1' => '1 اﻟﺘﻠﻴﻔﻮﻥ',
+ 'phone2' => '2 اﻟﺘﻠﻴﻔﻮﻥ',
  'address' => 'اﻟﻌﻨﻮاﻥ',
+ 'orders' => 'اﻟﻄﻠﺒﺎﺕ',
+ 'previous_orders' => 'اﻟﻄﻠﺒﺎﺕ اﻟﺴﺎﺑﻘﻪ',
+ 'add_order' => 'اﺿﻒ ﻃﻠﺐ',
+ 'edit_order' => 'ﺗﻌﺪﻳﻞ اﻟﻄﻠﺐ',
+ 'created_at' => 'ﺗﻢ اﺿﺎﻓﺘﻪ',
+ 'total' => 'اﻟﻤﺠﻤﻮﻉ',
+ 'total_price' => 'اﻟﻤﺒﻠﻎ اﻟﻜﻠﻲ',
 
 
  'users' => 'اﻟﻤﺸﺮﻓﻴﻦ',

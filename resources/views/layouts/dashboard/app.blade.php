@@ -46,13 +46,28 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   @endif
 
+  <style type="text/css">
+    .loader {
+      border: 16px solid #f3f3f3; /* Light grey */
+      border-top: 16px solid #3498db; /* Blue */
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
 
   <!-- jQuery 3 -->
   <script type="text/javascript" src="{{ asset('dashboard/js/jquery.min.js') }}"></script>
-  {{-- 
   <!-- jQuery UI 1.11.4 -->
   <script type="text/javascript" src="{{ asset('dashboard/js/jquery-ui.min.js') }}"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -61,6 +76,7 @@
   </script>
   <!-- Bootstrap 3.3.7 -->
   <script type="text/javascript" src="{{ asset('dashboard/js/bootstrap3.min.js') }}"></script>
+  {{-- 
   <!-- Morris.js charts -->
   <script type="text/javascript" src="{{ asset('dashboard/js/raphael.min.js') }}"></script>
   <script type="text/javascript" src="{{ asset('dashboard/js/morris.min.js') }}"></script>
@@ -83,12 +99,19 @@
   <!-- FastClick -->
   <script type="text/javascript" src="{{ asset('dashboard/js/fastclick.js') }}"></script>
    --}}
+  
   <!-- CKEDITOR -->
   <script type="text/javascript" src="{{ asset('dashboard/plugins/ckeditor/ckeditor.js') }}"></script>
-  
   <!-- AdminLTE App -->
   <script type="text/javascript" src="{{ asset('dashboard/js/adminlte.min.js') }}"></script>
   <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+  <!-- printThis -->
+  <script type="text/javascript" src="{{ asset('dashboard/js/printThis.js') }}"></script>
+
+  {{-- Custom js --}}
+  <script type="text/javascript" src="{{ asset('dashboard/js/custom/order.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('dashboard/js/custom/image_preview.js') }}"></script>
+
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -353,20 +376,6 @@
         })
       ]
     }).show();
-  });
-
-
-  // image preview
-  $('.image-input').change(function() {
-    if (this.files && this.files[0]) {
-      let reader = new FileReader();
-
-      reader.onload = function(e) {
-        $('.image-preview').attr('src', e.target.result);
-      }
-
-      reader.readAsDataURL(this.files[0]);
-    }
   });
 
 

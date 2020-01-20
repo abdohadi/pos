@@ -56,7 +56,7 @@
 							<div class="nav-tabs-custom">
 
 								@php
-									$models = ['users', 'categories', 'products'];
+									$models = ['users', 'categories', 'products', 'clients', 'orders'];
 									$perms = ['create', 'read', 'update', 'delete'];
 								@endphp
 
@@ -68,9 +68,12 @@
 
 					            <div class="tab-content">
 					            	@foreach ($models as $index => $model)
-						              	<div class="tab-pane {{ $index == 0 ? 'active' : '' }}" id="{{$model}}">
+						              	<div class="tab-pane {{ $index == 0 ? 'active' : '' }}" id="{{ $model }}">
 						              		@foreach ($perms as $key => $perm)
-												<label><input type="checkbox" name="permissions[]" {{ old('permissions') ? (in_array("{$perm}_{$model}", old('permissions')) ? 'checked' : '') : ($user->hasPermission("{$perm}_{$model}") ? 'checked' : '') }} value="{{ "{$perm}_{$model}" }}"> @lang("site.{$perm}")</label>
+												<label>
+													<input type="checkbox" name="permissions[]" value="{{ "{$perm}_{$model}" }}" 
+														{{ old('permissions') ? (in_array("{$perm}_{$model}", old('permissions')) ? 'checked' : '') : ($user->hasPermission("{$perm}_{$model}") ? 'checked' : '') }}> @lang("site.{$perm}")
+												</label>
 						              		@endforeach
 						              	</div>
 						            @endforeach

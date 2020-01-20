@@ -42,6 +42,7 @@ class ManageCategoriesTest extends TestCase
     /** @test */
     public function creating_a_category_requires_a_name()
     {
+        $this->withoutExceptionHandling();
         $user = $this->createUser('admin', ['create_categories']);
 
         $category = factory('App\Category')->raw(['name'=>'']);

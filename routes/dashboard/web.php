@@ -10,7 +10,7 @@ Route::group([
 	// any name in this group 'dashboard.name'
 	Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(function() {	
 		// dashboard/index
-		Route::get('/index', 'DashboardController@index')->name('index');
+	 	Route::get('/index', 'DashboardController@index')->name('index');
 
 		// category routes
 		Route::resource('categories', 'CategoriesController');
@@ -20,12 +20,16 @@ Route::group([
 
 		// client routes
 		Route::resource('clients', 'ClientsController');
+		Route::resource('clients.orders', 'Clients\OrdersController');
+
+		// order routes
+		Route::resource('orders', 'OrdersController');
+		Route::get('orders/{order}/products', 'OrdersController@products')->name('orders.products');
 
 		// user routes
 		Route::resource('users', 'UsersController');
 	});
 
-	
 });
 
 
