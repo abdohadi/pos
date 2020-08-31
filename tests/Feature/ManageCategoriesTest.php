@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageCategoriesTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     /** @test */
     public function a_user_without_read_permission_cannot_view_categories()
@@ -42,10 +42,10 @@ class ManageCategoriesTest extends TestCase
     /** @test */
     public function creating_a_category_requires_a_name()
     {
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
         $user = $this->createUser('admin', ['create_categories']);
 
-        $category = factory('App\Category')->raw(['name'=>'']);
+        $category = factory('App\Category')->raw(['ar' => ['name'=>''], 'en' => ['name'=>'']]);
 
         $this->actingAs($user)->post('dashboard/categories', $category)
             ->assertSessionHasErrors('ar.name')

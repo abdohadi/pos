@@ -38,6 +38,7 @@
 	          						id="product-{{ $product->id }}"
 	          						data-name="{{ $product->name }}"
 	          						data-id="{{ $product->id }}"
+	          						data-delete-url="{{ route('dashboard.orders.removeProduct', [$client, $order, $product]) }}"
 	          						data-price="{{ $product->sale_price }}"
 	          						class="btn btn-sm add-product-btn {{ isset($order) ? (in_array($product->id, $order->products->pluck('id')->toArray()) ? 'btn-default disabled' : 'btn-success') : 'btn-success'}}">
 	          						<i class="fa fa-plus"></i>

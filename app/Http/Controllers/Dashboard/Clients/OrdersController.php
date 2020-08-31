@@ -83,19 +83,29 @@ class OrdersController extends Controller
 
         foreach ($request->products as $id=>$quantity_array) {
             $product = Product::findOrFail($id);
-            $pivot = $order->products->find($id)->pivot;
+            $orderProducts = $order->products;
+
+            if ($orderProducts->contains($product)) { 
+                // If the product is already attached to the order
+                $pivot = $orderProducts->find($id)->pivot;
+
+                $productQuantity = ($quantity_array['quantity'] - $pivot->quantity);
+            } else {
+                // If the product is added by admins so it's not yet attached to the order 
+                $order->products()->syncWithoutDetaching($product);
+
+                $productQuantity = $quantity_array['quantity'];
+            }
 
             $product->update([
                 // stock - (new - old) --> ex: 17-(2-3) / 17-(5-3)
-                'stock' => $product->stock - ($quantity_array['quantity'] - $pivot->quantity)
-            ]);
-
-            $pivot->update([
-                'quantity' => $quantity_array['quantity']
+                'stock' => $product->stock - $productQuantity
             ]);
 
             $total_price += $product->sale_price * $quantity_array['quantity'];
         }
+
+        $order->products()->sync($request->products);
 
         $order->update([
             'total_price' => $total_price
@@ -106,7 +116,13 @@ class OrdersController extends Controller
         return redirect()->route('dashboard.orders.index');
     }
 
-    public function destroy() {
-        abort(404);
+    public function removeProduct(Request $request, Client $client, Order $order, Product $product) {
+        if ($order->products->find($product->id)) {
+            $quantity = $orderProduct->pivot->quantity;
+
+            $product->update(["stock" => $product->stock + $quantity]);
+
+            $order->products()->detach($product);
+        }
     }
 }

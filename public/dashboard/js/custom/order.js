@@ -6,6 +6,7 @@ $(document).ready(function () {
 		
 		var name = $(this).data('name'),
 			 id = $(this).data('id'),
+			 deleteUrl = $(this).data('delete-url'),
 			 price = numberFormat($(this).data('price'));
 
 		var html = 
@@ -14,7 +15,7 @@ $(document).ready(function () {
 			<td><input type="number" name="products[${id}][quantity]" class="form-control product-quantity" data-price="${price}" min="1" value="1"></td>
 			<td class="product-price">${price}</td>
 			<td>
-				<button class="btn btn-danger btn-sm remove-product-btn" data-id="${id}"><i class="fa fa-trash"></i></button>
+				<button class="btn btn-danger btn-sm remove-product-btn" data-id="${id}" data-url="${deleteUrl}"><i class="fa fa-trash"></i></button>
 			</td>
 		</tr>`;
 
@@ -34,13 +35,10 @@ $(document).ready(function () {
 	$('body').on('click', '.remove-product-btn', function(e) {
 		e.preventDefault();
 
-		var id = $(this).data('id');
-
-		$(this).closest('tr').remove();
-
-		$('#product-' + id).removeClass('btn-default disabled').addClass('btn-success');
-
+		removeProduct($(this));
+		
 		calculateTotal();
+
 	});
 
 	// product quantity
@@ -120,4 +118,19 @@ function numberFormat(number) {
 		return numString.concat('.', decNum);
 	}
 	return number.toFixed(2);
+}
+
+// Ajax request to detach a product from an order
+function removeProduct(btnEl) {
+	$.ajax({
+		url: btnEl.data('url'),
+		method: 'GET',
+		success: function() {
+			var id = btnEl.data('id');
+
+			btnEl.closest('tr').remove();
+
+			$('#product-' + id).removeClass('btn-default disabled').addClass('btn-success');
+		}
+	});
 }

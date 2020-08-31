@@ -14,11 +14,11 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/skin-blue.min.css') }}">
-  {{-- 
   <!-- Ionicons -->
   <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/ionicons/css/ionicons.min.css') }}">
   <!-- Morris chart -->
   <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/morris.css') }}">
+  {{-- 
   <!-- jvectormap -->
   <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/jquery-jvectormap.css') }}">
   <!-- Date Picker -->
@@ -60,6 +60,14 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    .morris-hover-point {
+      color: #666 !important;
+    }
+
+    .form-group label {
+      margin-right: 10px;
+    }
   </style>
 
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -76,11 +84,11 @@
   </script>
   <!-- Bootstrap 3.3.7 -->
   <script type="text/javascript" src="{{ asset('dashboard/js/bootstrap3.min.js') }}"></script>
-  {{-- 
   <!-- Morris.js charts -->
   <script type="text/javascript" src="{{ asset('dashboard/js/raphael.min.js') }}"></script>
   <script type="text/javascript" src="{{ asset('dashboard/js/morris.min.js') }}"></script>
   <!-- Sparkline -->
+  {{-- 
   <script type="text/javascript" src="{{ asset('dashboard/js/jquery.sparkline.min.js') }}"></script>
   <!-- jvectormap -->
   <script type="text/javascript" src="{{ asset('dashboard/js/jquery-jvectormap-1.2.2.min.js') }}"></script>
@@ -110,7 +118,6 @@
 
   {{-- Custom js --}}
   <script type="text/javascript" src="{{ asset('dashboard/js/custom/order.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('dashboard/js/custom/image_preview.js') }}"></script>
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -383,6 +390,9 @@
   CKEDITOR.config.language = "{{ app()->getLocale() }}";
 
 </script>
+<script type="text/javascript" src="{{ asset('dashboard/js/custom/image_preview.js') }}"></script>
+
+@stack('scripts')
 
 </body>
 </html>

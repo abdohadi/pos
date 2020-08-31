@@ -20,10 +20,11 @@ Route::group([
 
 		// client routes
 		Route::resource('clients', 'ClientsController');
-		Route::resource('clients.orders', 'Clients\OrdersController');
+		Route::resource('clients.orders', 'Clients\OrdersController')->except(['index', 'show', 'destroy']);
+		Route::get('clients/{client}/orders/{order}/products/{product}', 'Clients\OrdersController@removeProduct')->name('orders.removeProduct');
 
 		// order routes
-		Route::resource('orders', 'OrdersController');
+		Route::resource('orders', 'OrdersController')->only(['index', 'destroy']);
 		Route::get('orders/{order}/products', 'OrdersController@products')->name('orders.products');
 
 		// user routes

@@ -32,8 +32,8 @@
 
 						@for ($i = 1; $i <= 2; $i++)
 							<div class="form-group">
-								<label for="phone{$i}">@lang("site.phone{$i}")</label>
-								<input type="text" name="phone[]" id="phone{$i}" class="form-control" value="{{ old('phone')[$i-1] }}">
+								<label for="phone{{ $i }}">@lang("site.phone{$i}")</label>
+								<input type="text" name="phone[]" id="phone{{ $i }}" class="form-control" value="{{ old('phone') ? old('phone')[$i-1] : '' }}">
 							</div>
 						@endfor
 

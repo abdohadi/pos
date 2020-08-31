@@ -23,32 +23,6 @@ class OrdersController extends Controller
 		return view('dashboard.orders.index', compact('orders'));
 	}//end of index
 
-	public function products(Order $order) {
-		$products = $order->products;
-
-		return view('dashboard.orders._products', compact(['products', 'order']));
-	}
-
-	public function show() {
-      abort(404);
-	}
-
-	public function store() {
-      abort(404);
-	}
-
-	public function create() {
-      abort(404);
-	}
-
-	public function edit() {
-      abort(404);
-	}
-
-	public function update() {
-      abort(404);
-	}
-
 	public function destroy(Order $order) {
       foreach ($order->products as $product) {
       	$product->update([
@@ -61,5 +35,11 @@ class OrdersController extends Controller
       session()->flash('success', __('site.deleted_successfully'));
 
       return redirect()->route('dashboard.orders.index');
+	}
+
+	public function products(Order $order) {
+		$products = $order->products;
+
+		return view('dashboard.orders._products', compact(['products', 'order']));
 	}
 }

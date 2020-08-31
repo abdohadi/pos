@@ -41,13 +41,17 @@
 						   		<tbody class="order-list">
 						   			@foreach ($order->products as $product)
 						   				<tr>
-												<td>{{ $product->name }}</td>
-												<td><input type="number" name="products[{{ $product->id }}][quantity]" class="form-control product-quantity" data-price="{{ number_format($product->sale_price, 2) }}" min="1" value="{{ $product->pivot->quantity }}"></td>
-												<td class="product-price">{{ number_format($product->sale_price * $product->pivot->quantity, 2) }}</td>
-												<td>
-													<button class="btn btn-danger btn-sm remove-product-btn" data-id="{{ $product->id }}"><i class="fa fa-trash"></i></button>
-												</td>
-											</tr>
+											<td>{{ $product->name }}</td>
+											<td><input type="number" name="products[{{ $product->id }}][quantity]" class="form-control product-quantity" data-price="{{ number_format($product->sale_price, 2) }}" min="1" value="{{ $product->pivot->quantity }}"></td>
+											<td class="product-price">{{ number_format($product->sale_price * $product->pivot->quantity, 2) }}</td>
+											<td>
+												<button class="btn btn-danger btn-sm remove-product-btn" 
+														data-id="{{ $product->id }}"
+														data-url="{{ route('dashboard.orders.removeProduct', [$client, $order, $product]) }}">
+													<i class="fa fa-trash"></i>
+												</button>
+											</td>
+										</tr>
 						   			@endforeach
 						   		</tbody>
 						   	</table>
